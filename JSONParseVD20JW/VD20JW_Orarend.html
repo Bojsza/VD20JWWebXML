@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+	
+<html lang="hu">
+	
+<head>
+	<meta charset="UTF-8">
+	<title>Órarend</title>
+	
+</head>
+<body>
+	<h1>Órarend</h1>
+	<div>id="output"</div>
+	
+	<script>
+		var jsonData= {
+			"VD20JW_orarend": {
+			    "ora": [
+			      {
+			        "kurzus": "Szamitaselmelet",
+			        "idopont": {
+			          "nap": "Hetfo",
+			          "tol": "10:00",
+			          "ig": "12:55"
+			        },
+			        "helyszin": "Online",
+			        "oktato": "Dr. Veres Laura",
+			        "szak": "Programtervezo Informatikus"
+			      },
+			      {
+			        "kurzus": "Komputergrafika és kepfeldolgozás",
+			        "idopont": {
+			          "nap": "Hetfo",
+			          "tol": "14:00",
+			          "ig": "15:25"
+			        },
+			        "helyszin": "Online",
+			        "oktato": "Fazekas Levente",
+			        "szak": "Programtervezo Informatikus"
+			      },
+			      {
+			        "kurzus": "Informatikatortenet",
+			        "idopont": {
+			          "nap": "Hetfo",
+			          "tol": "15:00",
+			          "ig": "18:20"
+			        },
+			        "helyszin": "Hars, tantermi",
+			        "oktato": "Janics Tamas",
+			        "szak": "Programtervezo Informatikus"
+			      },
+			      {
+			        "kurzus": "Alkalmazasok fejlesztese projektlabor II.",
+			        "idopont": {
+			          "nap": "Szerda",
+			          "tol": "10:00",
+			          "ig": "12:55"
+			        },
+			        "helyszin": "Hars, tantermi",
+			        "oktato": "Perlaki Attila",
+			        "szak": "Programtervezo Informatikus"
+			      },
+			      {
+			        "kurzus": "Webkonyvtarak",
+			        "idopont": {
+			          "nap": "Szerda",
+			          "tol": "14:00",
+			          "ig": "15:25"
+			        },
+			        "helyszin": "Kabar, tantermi",
+			        "oktato": "Dr. Bednarik Laszlo",
+			        "szak": "Programtervezo Informatikus"
+			      },
+			      {
+			        "kurzus": "Halozati architekturak es protokollok",
+			        "idopont": {
+			          "nap": "Szerda",
+			          "tol": "17:00",
+			          "ig": "18:20"
+			        },
+			        "helyszin": "Kabar, tantermi",
+			        "oktato": "Janics Tamas",
+			        "szak": "Programtervezo Informatikus"
+			      },
+			      {
+			        "kurzus": "Valoszinusegszamitas es statisztika",
+			        "idopont": {
+			          "nap": "Csutortok",
+			          "tol": "8:00",
+			          "ig": "11:15"
+			        },
+			        "helyszin": "Kabar, tantermi",
+			        "oktato": "Dr. Foldvari Attila",
+			        "szak": "Programtervezo Informatikus"
+			      },
+			      {
+			        "kurzus": "Oktatas es gamifikacio, videojatek-tanulmanyok",
+			        "idopont": {
+			          "nap": "Csutortok",
+			          "tol": "12:00",
+			          "ig": "14:35"
+			        },
+			        "helyszin": "Kabar, tantermi",
+			        "oktato": "Perlaki Attila",
+			        "szak": "Programtervezo Informatikus"
+			      },
+			      {
+			        "kurzus": "Forditoprogramok",
+			        "idopont": {
+			          "nap": "Csutortok",
+			          "tol": "18:00",
+			          "ig": "19:10"
+			        },
+			        "helyszin": "Online",
+			        "oktato": "Dr. Csaszar Peter, Perlaki Attila",
+			        "szak": "Programtervezo Informatikus"
+			      }
+			    ]
+			  }
+		};
+		
+		var targetElement = document.getElementById("output");
+		displayJsonObject("", jsonData, targetElement);
+		
+		function displayJsonObject(prefix, jsonObject, targetElement){
+			for(var key in jsonObject){
+				if(jsonObject.hasOwnProperty(key)){
+					var keyStr = key;
+					var value = jsonObject[key];
+					
+					if(typeof value === 'object'){
+						displayJsonObject(prefix + keyStr + ": ", value, targetElement);
+					}else{
+						// a vegpont után nem akarunk linebreake-et
+						if(keyStr.tolowerCase() === "vegpont"){
+							targetElement.innerHTML += "<strong>" + keyStr + "</strong>: " + value;
+						}else{
+							targetElement.innerHTML += "<strong>" + keyStr + "</strong>: " + value + "<br>";
+						}
+					}
+				}
+			}
+			targetElement.innerHTML += "<br>";
+		}
+	</script>
+</body>
+</html>
